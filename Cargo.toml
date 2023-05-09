@@ -1,0 +1,13 @@
+[package]
+name = "miner"
+description = "Static analysis tool for verilog."
+authors = ["BorisZhguchev <zhguchev@hotmail.com>"]
+homepage = "https://github.com/besok/miner"
+repository = "https://github.com/besok/miner"
+version = "0.1.0"
+edition = "2021"
+keywords = ["verilog", "static_analysis", "bugs", "checker", "validator"]
+categories = ["development-tools", "parsing", "compilers","embedded-development"]
+
+[dependencies]
+sv-parser = "0.13.1"
