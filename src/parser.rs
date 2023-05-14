@@ -2,30 +2,12 @@ use std::collections::HashMap;
 use std::io::ErrorKind;
 use std::path::{Path, PathBuf};
 use sv_parser::{Defines, Error, parse_lib, parse_sv, SyntaxTree};
-
-#[derive(Debug)]
-pub enum ParserError {
-    FileError(std::io::Error),
-    ParseError(Error),
-}
-
-impl From<std::io::Error> for ParserError {
-    fn from(value: std::io::Error) -> Self {
-        ParserError::FileError(value)
-    }
-}
-
-
-impl From<Error> for ParserError {
-    fn from(value: Error) -> Self {
-        ParserError::ParseError(value)
-    }
-}
+use crate::MinerError;
 
 pub struct Ast {
-    path: PathBuf,
-    tree: SyntaxTree,
-    defines: Defines,
+    pub path: PathBuf,
+    pub tree: SyntaxTree,
+    pub defines: Defines,
 }
 
 impl Ast {
@@ -34,7 +16,7 @@ impl Ast {
     }
 }
 
-pub fn parse(path: PathBuf, included: Vec<PathBuf>) -> Result<Ast, ParserError> {
+pub fn parse(path: PathBuf, included: Vec<PathBuf>) -> Result<Ast, MinerError> {
     let mut paths: Vec<PathBuf> = included;
 
     let root = if path.is_dir() {
@@ -61,7 +43,7 @@ pub fn parse(path: PathBuf, included: Vec<PathBuf>) -> Result<Ast, ParserError> 
     Ok(Ast::new(path, tree, defines))
 }
 
-pub fn parse_root(path: PathBuf) -> Result<Ast, ParserError> {
+pub fn parse_root(path: PathBuf) -> Result<Ast, MinerError> {
     parse(path, vec![])
 }
 
@@ -83,9 +65,9 @@ pub mod tests {
 
     #[test]
     fn smoke() {
-        let ast = load("examples/smoke/CacheFlushManager.sv");
-        println!("{:?}", ast.tree);
-        println!("----- ----");
-        println!("{:?}", ast.defines);
+        let ast = load("examples/smoke/frontend.sv");
+        for n in &ast.tree {
+
+        }
     }
 }

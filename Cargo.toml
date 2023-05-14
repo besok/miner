@@ -11,3 +11,4 @@ categories = ["development-tools", "parsing", "compilers","embedded-development"
 
 [dependencies]
 sv-parser = "0.13.1"
+digraph-rs = {path = "../digraph"}
