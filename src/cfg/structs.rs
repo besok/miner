@@ -1,18 +1,24 @@
 trait Id {
-    type Id;
-    fn id(&self) -> Self::Id;
+    fn id(&self) -> usize;
 }
 
-pub enum Node {}
-
-pub struct Ctx {
+trait Ctx: Id {}
+#[derive(Debug)]
+pub struct ModuleCtx {
     pub id: usize,
 }
 
-impl Id for Ctx {
-    type Id = usize;
-
-    fn id(&self) -> Self::Id {
+impl Id for ModuleCtx {
+    fn id(&self) -> usize {
         self.id
     }
 }
+
+impl Ctx for ModuleCtx {}
+
+#[derive(Debug)]
+pub enum Node {
+    OpenModuleCtx(ModuleCtx),
+    CloseCtx(usize)
+}
+
