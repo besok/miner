@@ -4,6 +4,7 @@ use std::path::{Path, PathBuf};
 use sv_parser::{Defines, Error, parse_lib, parse_sv, SyntaxTree};
 use crate::MinerError;
 
+///Representation of the AST
 pub struct Ast {
     pub path: PathBuf,
     pub tree: SyntaxTree,
